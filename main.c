@@ -4,7 +4,7 @@
 
 int check_line();
 int isCorrect(char* str);
-int size=100;
+int size = 100;
 int main()
 {
     char str[size];
@@ -26,6 +26,7 @@ int main()
 }
 
 int check_line()
+
 {
     FILE* file = fopen("input.txt", "r");
     int lines = 0;
@@ -41,17 +42,16 @@ int check_line()
 int isCorrect(char* str)
 {
     int check = 1;
-
-    int open = 0, close = 0;
-    int open_brackets, close_braket; // position
+    int start = 0, end = 0;
+    int start_bracket, end_bracket; // position
     for (int i = 0; i < strlen(str); i++) {
         if (str[i] == '(') {
-            open++;
-            open_brackets = i + 1;
+            start++;
+            start_bracket = i + 1;
         }
         if (str[i] == ')') {
-            close++;
-            close_braket = i - 1;
+            end++;
+            end_bracket = i - 1;
         }
     }
     if (open != close) {
@@ -65,7 +65,7 @@ int isCorrect(char* str)
     }
 
     int k = 0;
-    for (int i = open_brackets; i <= close_braket; i++)
+    for (int i = start_bracket; i <= end_bracket; i++)
         if (isalpha(str[i])) {
             k = i;
             break;
@@ -97,12 +97,12 @@ int isCorrect(char* str)
         return check;
     }
 
-    if (strlen(str) > close_braket + 2) {
+    if (strlen(str) > end_bracket + 2) {
         check = 0;
         printf("%s\n", str);
-        for (int i = 0; i <= (close_braket + 2); i++)
+        for (int i = 0; i <= (end_bracket + 2); i++)
             printf(" ");
-        printf("^\nError at column %d: unexpected token\n", close_braket + 3);
+        printf("^\nError at column %d: unexpected token\n", end_bracket + 3);
     }
 
     return check;
