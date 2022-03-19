@@ -54,7 +54,7 @@ int isCorrect(char* str)
             end_bracket = i - 1;
         }
     }
-    if (open != close) {
+    if (start != end) {
         check = 0;
         int position = strlen(str);
         printf("%s\n", str);
